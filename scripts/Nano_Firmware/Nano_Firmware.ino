@@ -76,8 +76,6 @@ void setup() {
   // Other pin setup
   pinMode(LED_BUILTIN, OUTPUT);
 
-  while (!Serial); //Wait to connect to computer
-
   lastPacket = millis(); //start watchdog timer for the first packet
 
 }
@@ -107,14 +105,14 @@ void loop() {
 
   // When a new packet arrives indicated by a newline '\n' char:
   if (packetComplete) {      //If packet is valid
-    
-  //Incomming packet structure: |thruster 1 LSB|thruster 1 MSB|thruster 2 LSB|thruster 2 MSB|
-  //thruster 3 LSB|thruster 3 MSB|thruster 4 LSB|thruster 4 MSB|thruster 5 LSB|thruster 5 MSB|thruster 6 LSB|
-  //thruster 6 MSB|thruster 7 LSB|thruster 7 MSB|thruster 8 LSB|thruster 8 MSB|
+      
+    //Incomming packet structure: |thruster 1 LSB|thruster 1 MSB|thruster 2 LSB|thruster 2 MSB|
+    //thruster 3 LSB|thruster 3 MSB|thruster 4 LSB|thruster 4 MSB|thruster 5 LSB|thruster 5 MSB|thruster 6 LSB|
+    //thruster 6 MSB|thruster 7 LSB|thruster 7 MSB|thruster 8 LSB|thruster 8 MSB|
 
-  for(int i=0;i<packetLength-1;i+=2){
-    thrusters[i/2] = constrain(map(twosComp((packet[i+1] << 8) | packet[i]), -1000, 1000, 1000, 2000), 1000, 2000);
-  }
+    for(int i=0;i<packetLength-1;i+=2){
+      thrusters[i/2] = constrain(map(twosComp((packet[i+1] << 8) | packet[i]), -1000, 1000, 1000, 2000), 1000, 2000);
+    }
 
     //      Serial.println(packet, BIN);      //DEBUG
     //
@@ -134,14 +132,14 @@ void loop() {
   }
 
   // update thrusters to new values
-  T1.writeMicroseconds(thrusters[0]);
-  T2.writeMicroseconds(thrusters[1]);
-  T3.writeMicroseconds(thrusters[2]);
-  T4.writeMicroseconds(thrusters[3]);
-  T5.writeMicroseconds(thrusters[4]);
-  T6.writeMicroseconds(thrusters[5]);
-  T7.writeMicroseconds(thrusters[6]);
-  T8.writeMicroseconds(thrusters[7]);
+  T1.writeMicroseconds(thrusters[7]);
+  T2.writeMicroseconds(thrusters[6]);
+  T3.writeMicroseconds(thrusters[5]);
+  T4.writeMicroseconds(thrusters[4]);
+  T5.writeMicroseconds(thrusters[3]);
+  T6.writeMicroseconds(thrusters[2]);
+  T7.writeMicroseconds(thrusters[1]);
+  T8.writeMicroseconds(thrusters[0]);
  
 //  //Send packet to computer
 //  if (micros() - lastSend > sendPeriod) {

@@ -79,7 +79,7 @@ bool HardwareCom::setController(int t1, int t2, int t3, int t4, int t5, int t6, 
    outgoingPacket[outgoingPacketLength-1] = outgoingPacket[0];
    for(int i=1; i<outgoingPacketLength-1;i++){outgoingPacket[outgoingPacketLength-1]^=outgoingPacket[i];}
 
-//  std::cout << "packet down: " <<  std::bitset<8>(outgoingPacket[4]) << std::bitset<8>(outgoingPacket[3]) << std::bitset<8>(outgoingPacket[2]) << std::bitset<8>(outgoingPacket[1]) << std::bitset<8>(outgoingPacket[0]) << "\n";
+  //std::cout << "packet down: " <<  std::bitset<8>(outgoingPacket[4]) << std::bitset<8>(outgoingPacket[3]) << std::bitset<8>(outgoingPacket[2]) << std::bitset<8>(outgoingPacket[1]) << std::bitset<8>(outgoingPacket[0]) << "\n";
 
   size_t bytesSent = connection.write(outgoingPacket, outgoingPacketLength); //Sending 17 bytes
 

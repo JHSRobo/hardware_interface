@@ -12,7 +12,8 @@ find_package(catkin REQUIRED COMPONENTS
   rospy
   std_msgs
   sensor_msgs
-  cmake_modules  
+  cmake_modules
+  vector_drive
 )
 
 ## System dependencies are found with CMake's conventions
@@ -105,9 +106,9 @@ find_package(catkin REQUIRED COMPONENTS
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
-#  INCLUDE_DIRS include
+  INCLUDE_DIRS include
 #  LIBRARIES hardware_interface
-  CATKIN_DEPENDS roscpp 
+  CATKIN_DEPENDS roscpp
 #  DEPENDS system_lib
 )
 
@@ -135,7 +136,7 @@ include_directories(
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
- add_executable(rov_hardware_interface_node src/hw_interface.cpp src/serial.cpp src/unix.cpp src/arduino_com.cpp)
+add_executable(${PROJECT_NAME}_node src/hw_interface.cpp src/serial.cpp src/unix.cpp src/arduino_com.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -145,12 +146,12 @@ include_directories(
 
 ## Add cmake target dependencies of the executable
 ## same as for the library above
-# add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+ add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
-# target_link_libraries(${PROJECT_NAME}_node
-#   ${catkin_LIBRARIES}
-# )
+ target_link_libraries(${PROJECT_NAME}_node
+   ${catkin_LIBRARIES}
+ )
 
 #############
 ## Install ##

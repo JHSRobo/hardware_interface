@@ -9,7 +9,7 @@
  <!-- harware interface -->
    <node respawn="true"
 	pkg="hardware_interface" 
-	type="hw_thruster_controller_interface.py" 
-	name="hw_thruster_controller_interface"/>
+	type="hardware_interface_node"
+	name="hardware_interface_node"/>
 
 </launch>

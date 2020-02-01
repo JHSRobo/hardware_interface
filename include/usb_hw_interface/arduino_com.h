@@ -21,52 +21,21 @@ class HardwareCom
 {
   //Serial object that manages USB serial connection
   serial::Serial connection;
-  //Packet structure = |PEC|lwheel MSB|lwheel LSB|rwheel MSB|rwheel LSB|head MSB|head LSB
-  const int outgoingPacketLength = 7;
-  uint8_t outgoingPacket[7];   //Packet to the arduino (length = 6 + PEC)
-  //Packet structure = //Outgoing packet structure: |ch1 LSB|ch1 MSB|ch2 LSB|ch2 MSB|ch3 LSB|ch3 MSB|ch4 LSB|ch4 MSB|ch5 LSB|ch5 MSB|
-    // |encoder_left LSB|encoder_left|encoder_left|encoder_left MSB|
-    // |encoder_right LSB|encoder_right|encoder_right|encoder_right MSB|
-    // |lat LSB|lat|lat|lat MSB|
-    // |lon LSB|lon|lon|lon MSB|
-    // |speed LSB|speed MSB|angle LSB|angle MSB|altitude LSB|altitude MSB|
-    // |fix|fix quality|num satellites|
-    // |PEC|
-  const int incomingPacketLength = 36;
-  uint8_t incomingPacket[36]; //Packet from the zero (length = 12 + PEC)
-  int channels[5] = {}; //Values from CH1 to Ch5 for distance sensors
-  //  front_dist_pin  CH1
-  //  left_dist_pin   CH2
-  //  right_dist_pin  CH3
-  //  rear_dist_pin   CH4
-  //  bottom_dist_pin CH5
+  const int outgoingPacketLength = 17;
+  uint8_t outgoingPacket[17];   //Packet to the arduino (length = 16 + PEC)
+  //Outgoing packet structure: |PEC|thruster 1 LSB|thruster 1 MSB|thruster 2 LSB|thruster 2 MSB|
+  //thruster 3 LSB|thruster 3 MSB|thruster 4 LSB|thruster 4 MSB|thruster 5 LSB|thruster 5 MSB|thruster 6 LSB|
+  //thruster 6 MSB|thruster 7 LSB|thruster 7 MSB|thruster 8 LSB|thruster 8 MSB|
 
-  long encoderLeft, encoderRight;
-  FLOATUNION_t latitude, longitude;
-  float speed, angle, altitude; //ground speed, angle from north, and altitude from sea level
-  int fix, fix_quality, satellites;
-
+//  const int incomingPacketLength = 36;
+//  uint8_t incomingPacket[36]; //Packet from the zero (length = 12 + PEC)
 
 
 public:
   HardwareCom(std::string port, int baud);            //Constructor
-  bool setController(double rmotor_cmd, double lmotor_cmd, double head_cmd); //Sends input commands to arduino zero
+  bool setController(int t1, int t2, int t3, int t4, int t5, int t6, int t7, int t8); //Sends input commands to arduino zero
   bool readController();                            //Returns data read from the arduino zero
-  int getCh1();
-  int getCh2();
-  int getCh3();
-  int getCh4();
-  int getCh5();
-  long getEncoderLeft();
-  long getEncoderRight();
-  float getLatitude();
-  float getLongitude();
-  float getSpeed();
-  float getAngle();
-  float getAltitude();
-  int getFix();
-  int getFixQuality();
-  int getNumSatellites();
+  int t1, t2, t3, t4, t5, t6, t7, t8;
 };
 
 #endif

@@ -48,7 +48,7 @@ int main(int argc, char * argv[])
    ros::init(argc, argv, "hardware_interface");
    ros::NodeHandle nh;
 
-   HardwareCom connection("/dev/ttyACM0", 115200);
+   HardwareCom connection("/dev/ttyUSB0", 115200);
 
    ros::Subscriber verticals_sub = nh.subscribe("rov/cmd_vertical_vdrive", 1, update_verticals);
    ros::Subscriber horizontals_sub = nh.subscribe("rov/cmd_horizontal_vdrive", 1, update_horizontals);

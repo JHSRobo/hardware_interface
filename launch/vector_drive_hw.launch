@@ -18,8 +18,8 @@
  <!-- harware interface -->
    <node respawn="true"
 	pkg="hardware_interface" 
-	type="hw_thruster_controller_interface.py" 
-	name="hw_thruster_controller_interface"/>
+	type="hardware_interface_node"
+	name="hardware_interface_node"/>
 
  <!-- temp copilot interface -->
    <node pkg="rqt_reconfigure" type="rqt_reconfigure" name="rqt_reconfigure"/>
